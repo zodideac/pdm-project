@@ -1,6 +1,9 @@
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
+import model.Student;
+import util.DBConnection;
 public class StudentDAO {
     public List<Student> getAllStudents() throws SQLException {
         List<Student> list = new ArrayList<>();
@@ -24,7 +27,7 @@ public class StudentDAO {
         }
         return list;
     }
-    
+
     public void insertStudent(Student s) throws SQLException {
         String query = "INSERT INTO Student VALUES (?,?,?,?,?,?,?)";
         try (Connection conn = DBConnection.connect();
