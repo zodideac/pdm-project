@@ -1,18 +1,23 @@
 # University Healthcare Database Project
 
-##  1. Project Overview
-This project manages university healthcare data including students, staff, illnesses, appointments, and medical reports.
+## 1. Project Overview
+This project manages university healthcare data including:
+- Students
+- Staff
+- Illness information
+- Appointments
+- Medical reports
 
-Technologies used:
-- MySQL Workbench 8.0
-- Java (JDK 8+)
-- JDBC Connector
-- IDE: NetBeans / IntelliJ (without Maven)
+### Technologies
+- **MySQL Workbench 8.0**
+- **Java (JDK 8+)**
+- **JDBC Connector**
+- **IDE:** NetBeans / IntelliJ / VSCode (no Maven)
 
 ---
 
 ##  2. Setup Instructions
-### 2.1. Database Setup
+### 2.1 Database Setup
 1. Open **MySQL Workbench**
 2. Create connection:
    - Hostname: `localhost`
@@ -24,11 +29,17 @@ Technologies used:
 4. File → Open SQL Script → select `sample_data.sql`
    - **Press `Ctrl + Shift + Enter`**
 5. Right-click database → Refresh (or press `Ctrl + R`)
-### 2.2. Add JDBC library (used to allow Java to connect to MySQL)
-1. Open the project in **VSCode**.
-2. **Press `Ctrl + Shift + P`** → search for **Project Settings**.
-3. Go to the **libraries** tab → **Add Library**.
-4. Select the following file: `mysql-connector-j-9.5.0.jar` in the `lib` folder.
-5. Click **Apply Settings** to save.
 
+✔️ Database is now ready.
 
+### 2.2 Java Project Setup
+
+> *JDBC driver (`mysql-connector-j-9.5.0.jar`) is already included and referenced in the project settings.*  
+> No additional configuration required.
+
+---
+
+## 3. Running the Application
+1. Open the project in your IDE
+2. Ensure MySQL server is running
+3. Run `Main.java`
