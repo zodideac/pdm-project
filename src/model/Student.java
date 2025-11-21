@@ -1,50 +1,58 @@
 package model;
+import java.sql.Date;
 public class Student {
-    private int SID;
+    private int studentId;
     private String firstName;
-    private String middleName;
     private String lastName;
-    private String sex;
-    private String birthDate;
+    private Date dateOfBirth;
+    private String gender;
+    private String email;
+    private String phone;
     private String address;
 
-    public Student() { }
+    public Student() {}
 
-    public Student(int SID, String firstName, String middleName, String lastName, String sex, String birthDate, String address) {
-        this.SID = SID;
+    public Student( int studentId, String firstName, String lastName, String gender, 
+                    String address, Date dateOfBirth, String email, String phone) {
+        this.studentId = studentId;
         this.firstName = firstName;
-        this.middleName = middleName;
         this.lastName = lastName;
-        this.sex = sex;
-        this.birthDate = birthDate;
+        this.dateOfBirth = dateOfBirth;
+        this.gender = gender;
+        this.email = email;
+        this.phone = phone;
         this.address = address;
     }
 
     // getter & setter
-    public int getSID() { return SID; }
-    public void setSID(int SID) { this.SID = SID; }
+    public int getStudentId() { return studentId; }
+    public void getStudentId(int studentId) { this.studentId = studentId; }
 
     public String getFirstName() { return firstName; }
     public void setFirstName(String firstName) { this.firstName = firstName; }
 
-    public String getMiddleName() { return middleName; }
-    public void setMiddleName(String middleName) { this.middleName = middleName; }
-
     public String getLastName() { return lastName; }
     public void setLastName(String lastName) { this.lastName = lastName; }
 
-    public String getSex() { return sex; }
-    public void setSex(String sex) { this.sex = sex; }
+    public String getGender() { return gender; }
+    public void setGender(String gender) { this.gender = gender; }
 
-    public String getBirthDate() { return birthDate; }
-    public void setBirthDate(String birthDate) { this.birthDate = birthDate; }
-    
     public String getAddress() { return address; }
     public void setAddress(String address) { this.address = address; }
 
+    public Date getDateOfBirth() { return dateOfBirth; }
+    public void setDateOfBirth(Date dateOfBirth) { this.dateOfBirth = dateOfBirth; }
+
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
+
+    public String getPhone() { return phone; }
+    public void setPhone(String phone) { this.phone = phone; }
+
     @Override
     public String toString() {
-        return  "[SID=" + SID + ", firstName=" + firstName + ", middleName=" + middleName + 
-                ", lastName=" + lastName + ", sex=" + sex + ", birthDate=" + birthDate + ", address=" + address + "]";
+        return "Student{" + "studentId=" + studentId + ", firstName='" + firstName + '\'' 
+        + ", lastName='" + lastName + '\'' + ", dateOfBirth=" + dateOfBirth + ", gender='" 
+        + gender + '\'' + ", email='" + email + '\'' + ", phone='" + phone + '\'' + ", address='" + address + '\'' + '}';
     }
 }
