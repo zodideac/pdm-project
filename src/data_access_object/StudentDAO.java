@@ -6,89 +6,62 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StudentDAO {
-
-    public boolean addStudent(Student s) throws SQLException, ClassNotFoundException {
-        Connection conn = DBConnection.getConnection();
-        String sql = "INSERT INTO Student (S_ID, First_Name, Middle_Name, Last_Name, Sex, Birth_date, Address) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        PreparedStatement ps = conn.prepareStatement(sql);
-        ps.setInt(1, s.getSID());
-        ps.setString(2, s.getFirstName());
-        ps.setString(3, s.getMiddleName());
-        ps.setString(4, s.getLastName());
-        ps.setString(5, s.getSex());
-        ps.setString(6, s.getBirthDate()); // nếu dùng LocalDate thì convert
-        ps.setString(7, s.getAddress());
-        boolean rs = ps.executeUpdate() > 0;
-        conn.close();
-        return rs;
-    }
-
-    public Student getStudentById(int id) throws SQLException, ClassNotFoundException {
+    public void addStudent(Student s) throws SQLException {
+        String sql = "INSERT INTO Student (student_id, first_name, last_name, gender, address, date_of_birth, email, phone) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         Connection connection = DBConnection.getConnection();
-        String sql = "SELECT * FROM Student WHERE S_ID = ?";
         PreparedStatement ps = connection.prepareStatement(sql);
-        ps.setInt(1, id);
-        ResultSet rs = ps.executeQuery();
-        Student student = null;
-        if (rs.next()) {
-            student = new Student(
-                rs.getInt("S_ID"),
-                rs.getString("First_Name"),
-                rs.getString("Middle_Name"),
-                rs.getString("Last_Name"),
-                rs.getString("Sex"),
-                rs.getString("Birth_date"),
-                rs.getString("Address")
-            );
-        }
+        ps.setInt(1, s.getStudentId());
+        ps.setString(2, s.getFirstName());
+        ps.setString(3, s.getLastName());
+        ps.setString(4, s.getGender());
+        ps.setString(5, s.getAddress());
+        ps.setDate(6, s.getDateOfBirth());
+        ps.setString(7, s.getEmail());
+        ps.setString(8, s.getPhone());
+        ps.executeUpdate();
         connection.close();
-        return student;
     }
 
-    public List<Student> getAllStudents() throws SQLException, ClassNotFoundException {
-        Connection connection = DBConnection.getConnection();
+    public List<Student> getAllStudents() throws SQLException {
         String sql = "SELECT * FROM Student";
+        List<Student> list = new ArrayList<>();
+        Connection connection = DBConnection.getConnection();
         Statement statement = connection.createStatement();
         ResultSet rs = statement.executeQuery(sql);
-        List<Student> students = new ArrayList<>();
+
         while (rs.next()) {
-            students.add(new Student(
-                rs.getInt("S_ID"),
-                rs.getString("First_Name"),
-                rs.getString("Middle_Name"),
-                rs.getString("Last_Name"),
-                rs.getString("Sex"),
-                rs.getString("Birth_date"),
-                rs.getString("Address")
-            ));
+            Student s = new Student(
+                    rs.getInt("student_id"),
+                    rs.getString("first_name"),
+                    rs.getString("last_name"),
+                    rs.getString("gender"),
+                    rs.getString("address"),
+                    rs.getDate("date_of_birth"),
+                    rs.getString("email"),
+                    rs.getString("phone")
+            );
+            list.add(s);
         }
-        connection.close();
-        return students;        
+        return list;
     }
 
-    public boolean updateStudent(Student s) throws SQLException, ClassNotFoundException {
+    public void updateContactInfo(int studentId, String newPhone, String newEmail) throws SQLException {
+        String sql = "UPDATE Student SET phone=?, email=? WHERE student_id=?";
         Connection connection = DBConnection.getConnection();
-        String sql = "UPDATE Student SET First_Name=?, Middle_Name=?, Last_Name=?, Sex=?, Birth_date=?, Address=? WHERE S_ID=?";
         PreparedStatement ps = connection.prepareStatement(sql);
-        ps.setString(1, s.getFirstName());
-        ps.setString(2, s.getMiddleName());
-        ps.setString(3, s.getLastName());
-        ps.setString(4, s.getSex());
-        ps.setString(5, s.getBirthDate());
-        ps.setString(6, s.getAddress());
-        ps.setInt(7, s.getSID());
-        boolean result = ps.executeUpdate() > 0;
+        ps.setString(1, newPhone);
+        ps.setString(2, newEmail);
+        ps.setInt(3, studentId);
+        ps.executeUpdate();
         connection.close();
-        return result;
     }
 
-    public boolean deleteStudent(int id) throws SQLException, ClassNotFoundException {
+    public void deleteStudent(int studentId) throws SQLException {
+        String sql = "DELETE FROM Student WHERE student_id=?";
         Connection connection = DBConnection.getConnection();
-        String sql = "DELETE FROM Student WHERE S_ID=?";
         PreparedStatement ps = connection.prepareStatement(sql);
-        ps.setInt(1, id);
-        boolean result = ps.executeUpdate() > 0;
+        ps.setInt(1, studentId);
+        ps.executeUpdate();
         connection.close();
-        return result;
     }
 }
