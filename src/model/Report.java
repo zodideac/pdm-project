@@ -1,41 +1,54 @@
 package model;
+import java.sql.Timestamp;
 
 public class Report {
-    private String note;
-    private int AID;
-    private String illnessName;
-    private String diagnosis;
-    private String treatment;
+    private int reportId;
+    private int appointmentId;
+    private int studentId;
+    private Timestamp createdAt;
+    private String currentStatus;
+    private String notes;
 
     public Report() {}
 
-    public Report(String note, int AID, String illnessName, String diagnosis, String treatment) {
-        this.note = note;
-        this.AID = AID;
-        this.illnessName = illnessName;
-        this.diagnosis = diagnosis;
-        this.treatment = treatment;
+    public Report(int reportId, int appointmentId, int studentId,
+                  Timestamp createdAt, String currentStatus, String notes) {
+        this.reportId = reportId;
+        this.appointmentId = appointmentId;
+        this.studentId = studentId;
+        this.createdAt = createdAt;
+        this.currentStatus = currentStatus;
+        this.notes = notes;
     }
 
     // Getter & Setter
-    public String getNote() { return note; }
-    public void setNote(String note) { this.note = note; }
+    public int getReportId() { return reportId; }
+    public void setReportId(int reportId) { this.reportId = reportId; }
 
-    public int getAID() { return AID; }
-    public void setAID(int AID) { this.AID = AID; }
+    public int getAppointmentId() { return appointmentId; }
+    public void setAppointmentId(int appointmentId) { this.appointmentId = appointmentId; }
 
-    public String getIllnessName() { return illnessName; }
-    public void setIllnessName(String illnessName) { this.illnessName = illnessName; }
+    public int getStudentId() { return studentId; }
+    public void setStudentId(int studentId) { this.studentId = studentId; }
 
-    public String getDiagnosis() { return diagnosis; }
-    public void setDiagnosis(String diagnosis) { this.diagnosis = diagnosis; }
+    public Timestamp getCreatedAt() { return createdAt; }
+    public void setCreatedAt(Timestamp createdAt) { this.createdAt = createdAt; }
 
-    public String getTreatment() { return treatment; }
-    public void setTreatment(String treatment) { this.treatment = treatment; }
+    public String getCurrentStatus() { return currentStatus; }
+    public void setCurrentStatus(String currentStatus) { this.currentStatus = currentStatus; }
+
+    public String getNotes() { return notes; }
+    public void setNotes(String notes) { this.notes = notes; }
 
     @Override
     public String toString() {
-        return "Report{" + "note='" + note + '\'' + ", AID=" + AID + ", illnessName='" + 
-        illnessName + '\'' + ", diagnosis='" + diagnosis + '\'' + ", treatment='" + treatment + '\'' + '}';
+        return "Report{" +
+                "reportId=" + reportId +
+                ", appointmentId=" + appointmentId +
+                ", studentId=" + studentId +
+                ", createdAt=" + createdAt +
+                ", currentStatus='" + currentStatus + '\'' +
+                ", notes='" + notes + '\'' +
+                '}';
     }
 }
