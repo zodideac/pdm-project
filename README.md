@@ -11,27 +11,8 @@ Technologies used:
 
 ---
 
-##  2. Folder Structure
-project/
-│── src/  # Backend Java files
-│ ├── DBConnection.java
-│ ├── StudentDAO.java
-│ ├── Student.java
-│ └── Main.java
-│
-│── lib/
-│ └── mysql-connector-j-8.0.xx.jar
-│
-│── database/
-│ ├── schema.sql  # Database & table creation
-│ └── sample_data.sql  # Insert sample data
-│
-│── README.md
-
----
-
-##  3. Setup Instructions
-### 3.1. Database Setup
+##  2. Setup Instructions
+### 2.1. Database Setup
 1. Open **MySQL Workbench**
 2. Create connection:
    - Hostname: `localhost`
