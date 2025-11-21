@@ -1,49 +1,93 @@
-INSERT INTO Student VALUES
-(1, 'Nguyen', 'Van', 'An', 'M', '2003-05-10', 'Hanoi'),
-(2, 'Tran', 'Thi', 'Binh', 'F', '2004-07-21', 'Da Nang'),
-(3, 'Le', 'Thanh', 'Hung', 'M', '2003-11-12', 'HCM'),
-(4, 'Pham', 'Ngoc', 'Lan', 'F', '2004-03-03', 'Hue'),
-(5, 'Hoang', 'Gia', 'Khanh', 'M', '2005-01-15', 'Hanoi'),
-(6, 'Do', 'Thi', 'Thu', 'F', '2003-02-20', 'Quang Ninh'),
-(7, 'Bui', 'Minh', 'Hoang', 'M', '2004-04-18', 'Hai Phong'),
-(8, 'Phan', 'Kim', 'Ngan', 'F', '2005-08-22', 'HCM'),
-(9, 'Dao', 'Tuan', 'Kiet', 'M', '2003-09-05', 'Da Lat'),
-(10, 'Vo', 'Dieu', 'Anh', 'F', '2004-12-30', 'Can Tho');
+USE UniversityHealthSystem;
 
-INSERT INTO Staff VALUES
-(100, 'Dr. Nguyen Hung', 'Doctor', 'HCM'),
-(101, 'Pham Trung Truc', 'Nurse', 'HCM'),
-(102, 'Dr. Le Thi Hoa', 'Doctor', 'Hanoi'),
-(103, 'Nguyen Van Phuc', 'Specialist', 'Da Nang'),
-(104, 'Tran Thi Ngoc Minh', 'Nurse', 'Hue');
+-- Insert Students 
+INSERT INTO Student (first_name, last_name, date_of_birth, gender, email, phone, address) VALUES
+('An', 'Nguyễn Văn', '2001-05-15', 'Nam', 'an.nguyen@student.uni.edu.vn', '0901234567', '123 Đường Nguyễn Trãi, Quận 1, TP.HCM'),
+('Bình', 'Trần Thị', '2002-08-20', 'Nữ', 'binh.tran@student.uni.edu.vn', '0902345678', '456 Đường Lê Lợi, Quận 1, TP.HCM'),
+('Cường', 'Lê Hùng', '2000-12-10', 'Nam', 'cuong.le@student.uni.edu.vn', '0903456789', '789 Đường Điện Biên Phủ, Quận 3, TP.HCM'),
+('Dung', 'Phạm Thùy', '2003-03-25', 'Nữ', 'dung.pham@student.uni.edu.vn', '0904567890', '101 Đường Pasteur, Quận 3, TP.HCM'),
+('Em', 'Hoàng Đức', '2001-07-01', 'Nam', 'em.hoang@student.uni.edu.vn', '0905678901', '202 Đường Hai Bà Trưng, Quận 1, TP.HCM');
 
-INSERT INTO Illness VALUES
-('Flu', 'Cough, fever', 'Paracetamol', '3-5 days'),
-('Covid-19', 'Fever, cough, tiredness', 'Molnupiravir', '7-14 days'),
-('Dengue Fever', 'High fever, bleeding', 'ORS + Paracetamol', '7 days'),
-('Chickenpox', 'Itchy rash, blisters', 'Acyclovir', '10-14 days'),
-('Food Poisoning', 'Vomiting, diarrhea', 'ORS, probiotics', '1-3 days');
+-- Insert Medical Staff 
+INSERT INTO Medical_Staff (first_name, last_name, role, department, email, phone) VALUES
+('Phúc', 'Nguyễn Tâm', 'Bác sĩ', 'Khoa Nội', 'phuc.nguyen@hospital.uni.edu.vn', '0911223344'),
+('Lan', 'Vũ Thị', 'Y tá', 'Cấp cứu', 'lan.vu@hospital.uni.edu.vn', '0912334455'),
+('Hưng', 'Đỗ Minh', 'Bác sĩ', 'Khoa Ngoại', 'hung.do@hospital.uni.edu.vn', '0913445566'),
+('Mai', 'Lý Thanh', 'Dược sĩ', 'Nhà thuốc', 'mai.ly@hospital.uni.edu.vn', '0914556677'),
+('Tuấn', 'Trịnh Quốc', 'Quản trị viên', 'Hành chính', 'tuan.trinh@hospital.uni.edu.vn', '0915667788');
 
-INSERT INTO Appointment VALUES
-(1, 1, 100, '2025-10-25 09:00:00'),
-(2, 2, 101, '2025-10-25 10:30:00'),
-(3, 3, 102, '2025-10-26 08:00:00'),
-(4, 4, 103, '2025-10-26 14:00:00'),
-(5, 5, 100, '2025-10-27 09:45:00'),
-(6, 6, 104, '2025-10-27 11:15:00'),
-(7, 7, 101, '2025-10-28 13:00:00'),
-(8, 8, 102, '2025-10-28 15:30:00'),
-(9, 9, 103, '2025-10-29 10:00:00'),
-(10, 10, 104, '2025-10-29 16:00:00');
+-- Insert Diseases
+INSERT INTO Disease (name, description, severity, contagious) VALUES
+('Cúm mùa (Seasonal Flu)', 'Nhiễm trùng đường hô hấp do virus cúm gây ra.', 'Nhẹ', TRUE),
+('Sốt xuất huyết (Dengue)', 'Bệnh truyền nhiễm do muỗi vằn đốt.', 'Nặng', FALSE),
+('Đau dạ dày (Gastritis)', 'Viêm niêm mạc dạ dày gây đau bụng.', 'Trung bình', FALSE),
+('Viêm họng (Pharyngitis)', 'Viêm sưng vùng họng.', 'Nhẹ', TRUE),
+('Dị ứng phấn hoa (Pollen Allergy)', 'Phản ứng dị ứng với phấn hoa.', 'Nhẹ', FALSE);
 
-INSERT INTO Report VALUES
-('Recovered well', 1, 'Flu', 'Mild flu symptoms', 'Paracetamol'),
-('Still under treatment', 2, 'Covid-19', 'Cough and fever', 'Molnupiravir'),
-('Recovered', 3, 'Food Poisoning', 'Stomach pain reduced', 'ORS'),
-('Needs follow-up', 4, 'Dengue Fever', 'Low platelet count', 'Paracetamol'),
-('Under observation', 5, 'Flu', 'Sore throat and fever', 'Paracetamol'),
-('Recovered slowly', 6, 'Chickenpox', 'Skin blisters healing', 'Acyclovir'),
-('Stable condition', 7, 'Covid-19', 'Fatigue improving', 'Molnupiravir'),
-('Recovered', 8, 'Flu', 'Light cough', 'Paracetamol'),
-('Follow-up required', 9, 'Dengue Fever', 'Weakness persists', 'ORS'),
-('Recovered fully', 10, 'Food Poisoning', 'Digestive system normal', 'ORS');
+-- ==========================================
+-- 2. POPULATE DEPENDENT TABLES (Level 1)
+-- ==========================================
+
+-- Insert Alerts (Linked to Diseases)
+INSERT INTO Alert (disease_id, message, severity, alert_date) VALUES
+(1, 'Mùa cúm đang đến, sinh viên nên tiêm phòng.', 'Thấp', '2023-10-01 08:00:00'),
+(2, 'Cảnh báo dịch sốt xuất huyết bùng phát tại ký túc xá khu B.', 'Cao', '2023-10-05 09:30:00'),
+(4, 'Gia tăng các ca viêm họng do thay đổi thời tiết.', 'Trung bình', '2023-11-01 10:00:00');
+
+-- Insert Appointments (Linked to Student & Staff)
+-- Assuming IDs 1-5 exist for both tables based on previous inserts
+INSERT INTO Appointment (student_id, staff_id, appt_date, appt_time, status, appt_type, room) VALUES
+(1, 1, '2023-10-10', '09:00:00', 'Completed', 'Khám tổng quát', 'P101'),
+(2, 1, '2023-10-10', '09:30:00', 'Completed', 'Khám bệnh', 'P101'),
+(3, 3, '2023-10-11', '10:00:00', 'Scheduled', 'Tái khám', 'P102'),
+(1, 2, '2023-10-12', '14:00:00', 'Cancelled', 'Tiêm phòng', 'P201'),
+(4, 1, '2023-10-15', '15:30:00', 'Scheduled', 'Cấp cứu nhẹ', 'P101');
+
+-- ==========================================
+-- 3. POPULATE DEEP DEPENDENT TABLES (Level 2)
+-- ==========================================
+
+-- Insert Treatments (Linked to Staff & Disease)
+INSERT INTO Treatment (staff_id, diagnosis_id, treatment_plan, start_date, end_date) VALUES
+(1, 1, 'Nghỉ ngơi, uống nhiều nước, dùng thuốc hạ sốt.', '2023-10-10', '2023-10-15'),
+(1, 3, 'Hạn chế đồ chua cay, uống thuốc tráng dạ dày.', '2023-10-10', '2023-10-24'),
+(3, 2, 'Theo dõi tiểu cầu, truyền dịch nếu cần thiết.', '2023-10-11', '2023-10-20');
+
+-- Insert Reports (Linked to Appointment & Student)
+-- Note: appointment_id 1 corresponds to student_id 1
+--       appointment_id 2 corresponds to student_id 2
+INSERT INTO Report (appointment_id, student_id, created_at, current_status, notes) VALUES
+(1, 1, '2023-10-10 09:20:00', 'Finalized', 'Sinh viên có triệu chứng mệt mỏi nhẹ, không sốt.'),
+(2, 2, '2023-10-10 09:50:00', 'Finalized', 'Đau vùng thượng vị, buồn nôn.'),
+(3, 3, '2023-10-11 10:20:00', 'Draft', 'Sốt cao ngày thứ 2, nghi ngờ sốt xuất huyết.');
+
+-- Insert Prescriptions (Linked to Report & Treatment)
+INSERT INTO Prescription (report_id, treatment_id, medication_name, dosage, frequency, start_date, end_date) VALUES
+(1, 1, 'Paracetamol', '500mg', 'Khi cần (tối đa 4 viên/ngày)', '2023-10-10', '2023-10-13'),
+(1, 1, 'Vitamin C', '1000mg', '1 viên mỗi sáng', '2023-10-10', '2023-10-20'),
+(2, 2, 'Phosphalugel', '20g', '3 lần/ngày trước ăn', '2023-10-10', '2023-10-17'),
+(3, 3, 'Oresol', 'Gói bột', 'Pha 1 gói với 1 lít nước, uống thay nước lọc', '2023-10-11', '2023-10-15');
+
+-- ==========================================
+-- VERIFICATION QUERIES
+-- ==========================================
+
+-- Check full appointment details
+SELECT 
+    a.appointment_id,
+    CONCAT(s.last_name, ' ', s.first_name) AS Student_Name,
+    CONCAT(m.last_name, ' ', m.first_name) AS Doctor_Name,
+    a.appt_date,
+    a.status
+FROM Appointment a
+JOIN Student s ON a.student_id = s.student_id
+JOIN Medical_Staff m ON a.staff_id = m.staff_id;
+
+-- Check prescriptions for specific students
+SELECT 
+    s.first_name AS Student,
+    p.medication_name,
+    p.dosage
+FROM Prescription p
+JOIN Report r ON p.report_id = r.report_id
+JOIN Student s ON r.student_id = s.student_id;
