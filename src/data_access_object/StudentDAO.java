@@ -52,7 +52,7 @@ public class StudentDAO {
         ResultSet rs = statement.executeQuery(sql);
         List<Student> students = new ArrayList<>();
         while (rs.next()) {
-            Student student = new Student(
+            students.add(new Student(
                 rs.getInt("S_ID"),
                 rs.getString("First_Name"),
                 rs.getString("Middle_Name"),
@@ -60,7 +60,7 @@ public class StudentDAO {
                 rs.getString("Sex"),
                 rs.getString("Birth_date"),
                 rs.getString("Address")
-            );
+            ));
         }
         connection.close();
         return students;        
