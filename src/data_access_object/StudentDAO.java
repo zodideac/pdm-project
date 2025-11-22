@@ -28,7 +28,6 @@ public class StudentDAO {
         Connection connection = DBConnection.getConnection();
         Statement statement = connection.createStatement();
         ResultSet rs = statement.executeQuery(sql);
-
         while (rs.next()) {
             Student s = new Student(
                     rs.getInt("student_id"),

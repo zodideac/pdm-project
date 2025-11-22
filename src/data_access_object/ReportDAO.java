@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReportDAO {
-
     public void addReport(Report report) throws SQLException {
         String sql = "INSERT INTO Report (appointment_id, student_id, current_status, notes) VALUES (?, ?, ?, ?)";
         Connection connection = DBConnection.getConnection();
@@ -48,8 +47,7 @@ public class ReportDAO {
         ps.executeUpdate();
         connection.close();
     }
-        
-    
+          
     public void deleteReport(int reportId) throws SQLException {
         String sql = "DELETE FROM Report WHERE report_id=?";
         Connection connection = DBConnection.getConnection();

@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PrescriptionDAO {
-
     public void addPrescription(Prescription p) throws SQLException {
         String sql = "INSERT INTO Prescription (report_id, treatment_id, medication_name, dosage, frequency, start_date, end_date) VALUES (?, ?, ?, ?, ?, ?, ?)";
         Connection connection = DBConnection.getConnection();
