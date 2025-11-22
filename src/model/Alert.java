@@ -8,12 +8,16 @@ public class Alert {
     private String severity;
     private Timestamp alertDate;
 
-    public Alert(int alertId, int diseaseId, String message, String severity, Timestamp alertDate) {
-        this.alertId = alertId;
+    public Alert(int diseaseId, String message, String severity, Timestamp alertDate){
         this.diseaseId = diseaseId;
         this.message = message;
         this.severity = severity;
         this.alertDate = alertDate;
+    }
+
+    public Alert(int alertId, int diseaseId, String message, String severity, Timestamp alertDate) {
+        this(diseaseId, message, severity, alertDate);
+        this.alertId = alertId;
     }
     
     // Getter & Setter

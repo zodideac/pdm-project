@@ -9,16 +9,18 @@ public class Report {
     private String currentStatus;
     private String notes;
 
-    public Report() {}
-
-    public Report(int reportId, int appointmentId, int studentId,
-                  Timestamp createdAt, String currentStatus, String notes) {
-        this.reportId = reportId;
+    public Report(int appointmentId, int studentId, Timestamp createdAt, String currentStatus, String notes) {
         this.appointmentId = appointmentId;
         this.studentId = studentId;
         this.createdAt = createdAt;
         this.currentStatus = currentStatus;
         this.notes = notes;
+    }
+
+    public Report(int reportId, int appointmentId, int studentId,
+                  Timestamp createdAt, String currentStatus, String notes) {
+        this(appointmentId, studentId, createdAt, currentStatus, notes);
+        this.reportId = reportId;
     }
 
     // Getter & Setter

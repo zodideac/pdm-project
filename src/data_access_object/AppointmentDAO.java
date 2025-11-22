@@ -6,24 +6,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AppointmentDAO {
-
-    // INSERT
-    public void addAppointment(Appointment appointment) throws SQLException {
+    public boolean addAppointment(Appointment a) throws SQLException {
         String sql = "INSERT INTO Appointment (student_id, staff_id, appt_date, appt_time, status, appt_type, room) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        Connection connection = DBConnection.getConnection();
-        PreparedStatement ps = connection.prepareStatement(sql);
-        ps.setInt(1, appointment.getStudentId());
-        ps.setInt(2, appointment.getStaffId());
-        ps.setDate(3, appointment.getApptDate());
-        ps.setTime(4, appointment.getApptTime());
-        ps.setString(5, appointment.getStatus());
-        ps.setString(6, appointment.getApptType());
-        ps.setString(7, appointment.getRoom());
-        ps.executeUpdate();
-        connection.close();
+        try (Connection connection = DBConnection.getConnection();
+            PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
+
+            ps.setInt(1, a.getStudentId());
+            ps.setInt(2, a.getStaffId());
+            ps.setDate(3, a.getApptDate());
+            ps.setTime(4, a.getApptTime());
+            ps.setString(5, a.getStatus());
+            ps.setString(6, a.getApptType());
+            ps.setString(7, a.getRoom());
+
+            int rowsInserted = ps.executeUpdate();
+            if (rowsInserted > 0) {
+                try (ResultSet rs = ps.getGeneratedKeys()){
+                    a.setAppointmentId(rs.getInt(1));
+                }
+            }
+            return rowsInserted > 0;
+        }
     }
     
-    // SELECT ALL
     public List<Appointment> getAllAppointments() throws SQLException {
         String sql = "SELECT * FROM Appointment";
         List<Appointment> list = new ArrayList<>();
@@ -47,7 +52,6 @@ public class AppointmentDAO {
         return list;
     }
 
-    // UPDATE STATUS
     public void updateStatus(int appointmentId, String newStatus) throws SQLException {
         String sql = "UPDATE Appointment SET status=? WHERE appointment_id=?";
         Connection connection = DBConnection.getConnection();
@@ -58,7 +62,6 @@ public class AppointmentDAO {
         connection.close();
     }
 
-    // DELETE
     public void deleteAppointment(int appointmentId) throws SQLException {
         String sql = "DELETE FROM Appointment WHERE appointment_id=?";
         Connection connection = DBConnection.getConnection();

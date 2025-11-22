@@ -10,11 +10,8 @@ public class Student {
     private String phone;
     private String address;
 
-    public Student() {}
-
-    public Student( int studentId, String firstName, String lastName, String gender, 
-                    String address, Date dateOfBirth, String email, String phone) {
-        this.studentId = studentId;
+    public Student(String firstName, String lastName, Date dateOfBirth, 
+                   String gender, String email, String phone, String address) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
@@ -24,9 +21,15 @@ public class Student {
         this.address = address;
     }
 
+    public Student(int studentId, String firstName, String lastName, String gender, 
+                   String address, Date dateOfBirth, String email, String phone) {
+        this(firstName, lastName, dateOfBirth, gender, email, phone, address);
+        this.studentId = studentId;
+    }
+
     // getter & setter
     public int getStudentId() { return studentId; }
-    public void getStudentId(int studentId) { this.studentId = studentId; }
+    public void setStudentId(int studentId) { this.studentId = studentId; }
 
     public String getFirstName() { return firstName; }
     public void setFirstName(String firstName) { this.firstName = firstName; }

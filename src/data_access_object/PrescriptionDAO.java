@@ -6,19 +6,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PrescriptionDAO {
-    public void addPrescription(Prescription p) throws SQLException {
+    public boolean addPrescription(Prescription p) throws SQLException {
         String sql = "INSERT INTO Prescription (report_id, treatment_id, medication_name, dosage, frequency, start_date, end_date) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        Connection connection = DBConnection.getConnection();
-        PreparedStatement ps = connection.prepareStatement(sql);
-        ps.setInt(1, p.getReportId());
-        ps.setInt(2, p.getTreatmentId());
-        ps.setString(3, p.getMedicationName());
-        ps.setString(4, p.getDosage());
-        ps.setString(5, p.getFrequency());
-        ps.setDate(6, p.getStartDate());
-        ps.setDate(7, p.getEndDate());
-        ps.executeUpdate();
-        connection.close();
+        try (Connection connection = DBConnection.getConnection();
+            PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
+
+            ps.setInt(1, p.getReportId());
+            ps.setInt(2, p.getTreatmentId());
+            ps.setString(3, p.getMedicationName());
+            ps.setString(4, p.getDosage());
+            ps.setString(5, p.getFrequency());
+            ps.setDate(6, p.getStartDate());
+            ps.setDate(7, p.getEndDate());
+
+            int rowsInserted = ps.executeUpdate();
+            if (rowsInserted > 0) {
+                try (ResultSet rs = ps.getGeneratedKeys()){
+                    if (rs.next()) {
+                        p.setPrescriptionId(rs.getInt(1));
+                    }
+                }
+            }
+            return rowsInserted > 0;
+        }
     }
     
     public List<Prescription> getAllPrescriptions() throws SQLException {

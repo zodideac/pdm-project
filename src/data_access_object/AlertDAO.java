@@ -6,17 +6,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AlertDAO {
-    public void addAlert(Alert a) throws SQLException {
-        String sql = "INSERT INTO Alert (alert_id, disease_id, message, severity, alert_date) VALUES (?, ?, ?, ?, ?)";
-        Connection connection = DBConnection.getConnection();
-        PreparedStatement ps = connection.prepareStatement(sql);
-        ps.setInt(1, a.getAlertId());
-        ps.setInt(2, a.getDiseaseId());
-        ps.setString(3, a.getMessage());
-        ps.setString(4, a.getSeverity());
-        ps.setTimestamp(5, a.getAlertDate());
-        ps.executeUpdate();
-        connection.close();
+    public boolean addAlert(Alert a) throws SQLException {
+        String sql = "INSERT INTO Alert (disease_id, message, severity, alert_date) VALUES (?, ?, ?, ?)";
+        try (Connection connection = DBConnection.getConnection();
+            PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
+
+            ps.setInt(1, a.getDiseaseId());
+            ps.setString(2, a.getMessage());
+            ps.setString(3, a.getSeverity());
+            ps.setTimestamp(4, a.getAlertDate());
+            
+            int rowsInserted = ps.executeUpdate();
+            if (rowsInserted > 0) {
+                try (ResultSet rs = ps.getGeneratedKeys()){
+                    if (rs.next()) {
+                        a.setAlertId(rs.getInt(1));
+                    }
+                }
+            }
+            return rowsInserted > 0;
+        }
     }
 
     public List<Alert> getAllAlerts() throws SQLException {

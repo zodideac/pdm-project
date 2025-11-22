@@ -6,16 +6,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReportDAO {
-    public void addReport(Report report) throws SQLException {
+    public boolean addReport(Report r) throws SQLException {
         String sql = "INSERT INTO Report (appointment_id, student_id, current_status, notes) VALUES (?, ?, ?, ?)";
-        Connection connection = DBConnection.getConnection();
-        PreparedStatement ps = connection.prepareStatement(sql);
-        ps.setInt(1, report.getAppointmentId());
-        ps.setInt(2, report.getStudentId());
-        ps.setString(3, report.getCurrentStatus());
-        ps.setString(4, report.getNotes());
-        ps.executeUpdate();
-        connection.close();
+        try (Connection connection = DBConnection.getConnection();
+            PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
+
+            ps.setInt(1, r.getAppointmentId());
+            ps.setInt(2, r.getStudentId());
+            ps.setString(3, r.getCurrentStatus());
+            ps.setString(4, r.getNotes());
+
+            int rowsInserted = ps.executeUpdate();
+            if (rowsInserted > 0) {
+                try (ResultSet rs = ps.getGeneratedKeys()){
+                    if (rs.next()) {
+                        r.setReportId(rs.getInt(1));
+                    }
+                }
+            }
+            return rowsInserted > 0;
+        }
     }
 
     public List<Report> getAllReports() throws SQLException {

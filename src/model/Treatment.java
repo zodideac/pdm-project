@@ -9,14 +9,18 @@ public class Treatment {
     private Date startDate;
     private Date endDate;
 
-    public Treatment(int treatmentId, int staffId, int diagnosisId,
-                     String treatmentPlan, Date startDate, Date endDate) {
-        this.treatmentId = treatmentId;
+    public Treatment(Integer staffId, Integer diagnosisId, String treatmentPlan, Date startDate, Date endDate) {
         this.staffId = staffId;
         this.diagnosisId = diagnosisId;
         this.treatmentPlan = treatmentPlan;
         this.startDate = startDate;
         this.endDate = endDate;
+    }
+
+    public Treatment(int treatmentId, int staffId, int diagnosisId,
+                     String treatmentPlan, Date startDate, Date endDate) {
+        this(staffId, diagnosisId, treatmentPlan, startDate, endDate);
+        this.treatmentId = treatmentId;
     }
 
     // Getter & Setter

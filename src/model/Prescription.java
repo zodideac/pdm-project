@@ -11,10 +11,8 @@ public class Prescription {
     private Date startDate;
     private Date endDate;
 
-    public Prescription(int prescriptionId, int reportId, int treatmentId,
-                        String medicationName, String dosage, String frequency,
-                        Date startDate, Date endDate) {
-        this.prescriptionId = prescriptionId;
+    public Prescription(int reportId, int treatmentId, String medicationName, String dosage, 
+                        String frequency, Date startDate, Date endDate){
         this.reportId = reportId;
         this.treatmentId = treatmentId;
         this.medicationName = medicationName;
@@ -22,6 +20,12 @@ public class Prescription {
         this.frequency = frequency;
         this.startDate = startDate;
         this.endDate = endDate;
+    }
+
+    public Prescription(int prescriptionId, int reportId, int treatmentId, String medicationName,
+                        String dosage, String frequency, Date startDate, Date endDate) {
+        this(reportId, treatmentId, medicationName, dosage, frequency, startDate, endDate);
+        this.prescriptionId = prescriptionId;
     }
     
     // Getter & Setter

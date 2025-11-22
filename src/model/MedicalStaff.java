@@ -9,17 +9,19 @@ public class MedicalStaff {
     private String email;
     private String phone;
 
-    public MedicalStaff() {}
-
-    public MedicalStaff(int staffId, String firstName, String lastName, String role,
-                        String department, String email, String phone) {
-        this.staffId = staffId;
+    public MedicalStaff(String firstName, String lastName, String role, String department, String email, String phone) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.role = role;
         this.department = department;
         this.email = email;
         this.phone = phone;
+    }
+
+    public MedicalStaff(int staffId, String firstName, String lastName, String role,
+                        String department, String email, String phone) {
+        this(firstName, lastName, role, department, email, phone);
+        this.staffId = staffId;
     }
 
     // Getter & Setter

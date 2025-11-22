@@ -13,11 +13,8 @@ public class Appointment {
     private String apptType;
     private String room;
 
-    public Appointment() {}
-
-     public Appointment(int appointmentId, int studentId, int staffId, Date apptDate,
+    public Appointment(int studentId, int staffId, Date apptDate,
                        Time apptTime, String status, String apptType, String room) {
-        this.appointmentId = appointmentId;
         this.studentId = studentId;
         this.staffId = staffId;
         this.apptDate = apptDate;
@@ -25,6 +22,12 @@ public class Appointment {
         this.status = status;
         this.apptType = apptType;
         this.room = room;
+    }
+
+    public Appointment(int appointmentId, int studentId, int staffId, Date apptDate,
+                       Time apptTime, String status, String apptType, String room) {
+        this(studentId, staffId, apptDate, apptTime, status, apptType, room);
+        this.appointmentId = appointmentId;
     }
 
     // Getter & Setter

@@ -6,18 +6,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MedicalStaffDAO {
-    // INSERT
-    public void addMedicalStaff(MedicalStaff staff) throws SQLException {
+    public boolean addMedicalStaff(MedicalStaff ms) throws SQLException {
         String sql = "INSERT INTO Medical_Staff (first_name, last_name, role, department, email, phone) VALUES (?, ?, ?, ?, ?, ?)";
         try (Connection connection = DBConnection.getConnection();
-            PreparedStatement ps = connection.prepareStatement(sql)) {
-            ps.setString(1, staff.getFirstName());
-            ps.setString(2, staff.getLastName());
-            ps.setString(3, staff.getRole());
-            ps.setString(4, staff.getDepartment());
-            ps.setString(5, staff.getEmail());
-            ps.setString(6, staff.getPhone());
-            ps.executeUpdate();
+            PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+
+            ps.setString(1, ms.getFirstName());
+            ps.setString(2, ms.getLastName());
+            ps.setString(3, ms.getRole());
+            ps.setString(4, ms.getDepartment());
+            ps.setString(5, ms.getEmail());
+            ps.setString(6, ms.getPhone());
+
+            int rowsInserted = ps.executeUpdate();
+            if (rowsInserted > 0) {
+                try (ResultSet rs = ps.getGeneratedKeys()){
+                    if (rs.next()) {
+                        ms.setStaffId(rs.getInt(1));
+                    }
+                }
+            }
+            return rowsInserted > 0;
         }
     }
 

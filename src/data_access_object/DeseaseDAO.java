@@ -6,17 +6,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DeseaseDAO {
-    public void addDisease(Disease d) throws SQLException {
-        String sql = "INSERT INTO Disease (disease_id, name, description, severity, contagious) VALUES (?, ?, ?, ?, ?)";
-        Connection connection = DBConnection.getConnection();
-        PreparedStatement ps = connection.prepareStatement(sql);
-        ps.setInt(1, d.getDiseaseId());
-        ps.setString(2, d.getName());
-        ps.setString(3, d.getDescription());
-        ps.setString(4, d.getSeverity());
-        ps.setBoolean(5, d.isContagious());
-        ps.executeUpdate();
-        connection.close();
+    public boolean addDisease(Disease d) throws SQLException {
+        String sql = "INSERT INTO Disease (name, description, severity, contagious) VALUES (?, ?, ?, ?)";
+        try (Connection connection = DBConnection.getConnection();
+            PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
+
+            ps.setString(1, d.getName());
+            ps.setString(2, d.getDescription());
+            ps.setString(3, d.getSeverity());
+            ps.setBoolean(4, d.isContagious());
+
+            int rowsInserted = ps.executeUpdate();
+            if (rowsInserted > 0) {
+                try (ResultSet rs = ps.getGeneratedKeys()){
+                    if (rs.next()) {
+                        d.setDiseaseId(rs.getInt(1));
+                    }
+                }
+            }
+            return rowsInserted > 0;
+        }
     }
 
     public List<Disease> getAllDiseases() throws SQLException {

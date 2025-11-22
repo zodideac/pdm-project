@@ -7,13 +7,16 @@ public class Disease {
     private String severity;
     private boolean contagious;
 
-    public Disease(int diseaseId, String name, String description,
-                   String severity, boolean contagious) {
-        this.diseaseId = diseaseId;
+    public Disease(String name, String description, String severity, boolean contagious){
         this.name = name;
         this.description = description;
         this.severity = severity;
         this.contagious = contagious;
+    }
+
+    public Disease(int diseaseId, String name, String description, String severity, boolean contagious) {
+        this(name, description, severity, contagious);
+        this.diseaseId = diseaseId;
     }
     // Getter & Setter
     public int getDiseaseId() { return diseaseId; }

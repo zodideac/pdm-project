@@ -6,20 +6,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StudentDAO {
-    public void addStudent(Student s) throws SQLException {
-        String sql = "INSERT INTO Student (student_id, first_name, last_name, gender, address, date_of_birth, email, phone) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        Connection connection = DBConnection.getConnection();
-        PreparedStatement ps = connection.prepareStatement(sql);
-        ps.setInt(1, s.getStudentId());
-        ps.setString(2, s.getFirstName());
-        ps.setString(3, s.getLastName());
-        ps.setString(4, s.getGender());
-        ps.setString(5, s.getAddress());
-        ps.setDate(6, s.getDateOfBirth());
-        ps.setString(7, s.getEmail());
-        ps.setString(8, s.getPhone());
-        ps.executeUpdate();
-        connection.close();
+    public boolean addStudent(Student s) throws SQLException {
+        String sql = "INSERT INTO Student (first_name, last_name, gender, address, date_of_birth, email, phone) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        try (Connection connection = DBConnection.getConnection();
+            PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+
+            ps.setString(1, s.getFirstName());
+            ps.setString(2, s.getLastName());
+            ps.setString(3, s.getGender());
+            ps.setString(4, s.getAddress());
+            ps.setDate(5, s.getDateOfBirth());
+            ps.setString(6, s.getEmail());
+            ps.setString(7, s.getPhone());
+
+            int rowsInserted = ps.executeUpdate();
+            if (rowsInserted > 0) {
+                ResultSet rs = ps.getGeneratedKeys();
+                if (rs.next()) {
+                    s.setStudentId(rs.getInt(1));
+                }
+            }
+            return rowsInserted > 0;
+        }
     }
 
     public List<Student> getAllStudents() throws SQLException {
