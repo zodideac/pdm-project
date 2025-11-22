@@ -2,11 +2,14 @@
 
 ## 1. Project Overview
 This project manages university healthcare data including:
-- Students
-- Staff
-- Illness information
-- Appointments
-- Medical reports
+- Student
+- Disease
+- Medical_staff
+- Appointment
+- Alert
+- Prescription
+- Treatment
+- Report
 
 ### Technologies
 - **MySQL Workbench 8.0**
