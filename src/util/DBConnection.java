@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 public class DBConnection {
     // Database connection details
-    private static final String URL = "jdbc:mysql://localhost:3306/university_healthcare";
+    private static final String URL = "jdbc:mysql://localhost:3306/UniversityHealthSystem";
     private static final String USER = "root";
     private static final String PASSWORD = "123456";
     
