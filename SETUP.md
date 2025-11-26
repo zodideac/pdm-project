@@ -29,7 +29,7 @@ The project folder contains two main directories:
 
 ## **Potential Issues and Solutions**
 
-### **JDK 23 Issues**
+### **JDK 21 Issues**
 If you encounter issues related to JDK 21, follow these steps:
 1. Remove any broken or problematic JDK 21 setup.
 2. Right-click on the project in NetBeans and select **Properties**.
