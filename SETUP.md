@@ -49,8 +49,9 @@ Nested paths can sometimes cause issues while building the project. To resolve t
 ---
 
 ## **Running the Project**
-1. After setting up the database and opening the project in NetBeans, locate the **`Main.java`** file in the `Main` package.
-2. Right-click on the file and select **Run File**.
+1. Before running the project, make sure that your Database is connected in Netbeans and do change the DB_PASSWORD locating '\src\config\GlobalConstants.java' to your own password for MySQL.
+2. After setting up the database and opening the project in NetBeans, locate the **`Main.java`** file in the `Main` package.
+3. Right-click on the file and select **Run File**.
 
 ---
 
