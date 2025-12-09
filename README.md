@@ -15,8 +15,7 @@
 5. [Prerequisites](#prerequisites)
 6. [Setup & Run](#setup--run)
 7. [Database](#database)
-8. [Project Structure (Suggested)](#project-structure-suggested)
-9. [Coding Philosophy & OOP Notes](#coding-philosophy--oop-notes)
+8. [Coding Philosophy & OOP Notes](#coding-philosophy--oop-notes)
 
 
 ---
@@ -71,9 +70,6 @@ Display the GUI screenshots included with the repository:
 ![Registration Page](gallery/UHD-Register.png "Registration Page")
 ![Dashboard](gallery/UHD-Dashboard.png "Dashboard Page")
 
-![Doctors Module](gallery/UHD-Staff.png "Doctors Module Page")
-![Appointments Module](gallery/UHD-Apppointment.png "Appointments Module Page")
-
 ---
 
 ## Prerequisites
@@ -127,7 +123,7 @@ java -jar build/libs/your-app.jar
 
 ---
 
-## Database (Overview)
+## Database 
 
 The application uses a relational schema with tables for Users, Doctors, Patients, Appointments, and Medicines. The database includes basic constraints and relationships to ensure referential integrity.
 
@@ -144,6 +140,7 @@ SOURCE database/data.sql;
 * **Encapsulation**: Model fields are private with getters/setters; input validation is performed before persistence.
 * **DRY & Reuse**: Shared UI components and utilities to avoid duplication.
 * **Layered Design**: Presentation (Swing), service (business rules), and persistence layers are separated for clarity and testability.
+
 
 
 
